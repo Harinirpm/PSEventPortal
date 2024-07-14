@@ -1,0 +1,55 @@
+.sidenav {
+    height: 100%;  
+    width: 265px;  
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    margin-top: 50px;
+    left: 0; 
+    background-color: #ffffff; 
+    transition: .5s ease; 
+    overflow-x: hidden; 
+    padding-top: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+.sidenav .link, .sidenav a {
+    text-decoration: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.sidenav .box {
+    display: flex;
+    align-items: center;
+    color: black;
+    padding: 20px;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    box-sizing: border-box; 
+    border-radius: 8px;
+}
+
+.sidenav .box .icon {
+    margin-right: 10px; 
+}
+
+.sidenav .box p {
+    margin: 0; 
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 15px; 
+    letter-spacing: normal;
+}
+
+.sidenav .link .active .box {
+    color: #0e78dc;
+    background-color: #e0f0ff;
+}
+
+.hide {
+    transform: translateX(-265px);
+}

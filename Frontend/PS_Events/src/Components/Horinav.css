@@ -1,0 +1,49 @@
+.horinav{
+    width:100%;
+    height: 58px;
+    background-color: white;
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    display: flex;
+    left: 0; 
+}
+
+.horinav .title img{
+    height: 35px;
+}
+
+.horinav .title{
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    margin-left: 25px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.horinav .title h3{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.horinav .ham{
+    margin-left: 30px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background-color: #e0f0ff;
+    color: #0e78dc;
+    padding: 5px;
+    border-radius: 8px;
+    display: none;
+}
+
+@media (max-width: 1370px){
+    .horinav .ham{
+        display: block;
+    }
+}
