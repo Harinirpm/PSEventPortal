@@ -97,7 +97,7 @@
 }
 
 .eventUploadForm .checkbox-group input {
-    display: none; /* Hide the default checkbox */
+    display: none; 
 }
 
 .eventUploadForm .checkbox-group input + span {
@@ -153,7 +153,7 @@
     color: #030303;
     width: 100%;
 }
-/*radio button css*/
+
 .eventUploadForm .radio-group {
     margin-top: 20px;
     margin-bottom: 30px;
@@ -173,7 +173,7 @@
 }
 
 .eventUploadForm .radio-group input[type="radio"] {
-    display: none; /* Hide the default radio button */
+    display: none; 
 }
 
 .eventUploadForm .radio-group input[type="radio"] + span {

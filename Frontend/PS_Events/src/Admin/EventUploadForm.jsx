@@ -3,11 +3,10 @@ import axios from 'axios';
 import "./EventUploadForm.css";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from 'react-router-dom';
 
 const departments = [
-    // 'Agriculture Engineering', 'Artificial Intelligence and Data Science', 'Artificial Intelligence and Machine Learning', 
-    // 'Computer Science and Engineering','Computer Technology', 'Computer Science and Business System', 'Computer science and Design', 
-    'Agriculture Engineering','Artificial Intelligence and Data Science', 'Artificial Intelligence and Machine Learning',
+   'Agriculture Engineering','Artificial Intelligence and Data Science', 'Artificial Intelligence and Machine Learning',
     'Information Technology','Computer Science and Engineering','Computer Technology','Computer Science and Business System',
     'Computer Science and Design',
     'Information Science Engineering','Electrical and Electronics Engineering','Electronics and Communication Engineering', 'Mechanical Engineering', 
@@ -16,7 +15,7 @@ const departments = [
     'Department 17'
 ];
 
-export default function EventUploadForm() {
+function EventUploadForm() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [eventNotice, setEventNotice] = useState(null);
@@ -28,6 +27,8 @@ export default function EventUploadForm() {
     const [teamSize, setTeamSize] = useState("");
     const [eventLink, setEventLink] = useState("");
     const [eventMode, setEventMode] = useState("");
+    const [eventImage, setEventImage] = useState(null);
+    const [imageError, setImageError] = useState("");
 
     const handleCheckboxChange = (department) => {
         setSelectedDepartments(prevState => 
@@ -37,41 +38,30 @@ export default function EventUploadForm() {
         );
     };
 
+    const navigate = useNavigate()
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const eventData = {
-            name,
-            description,
-            eventStartDate: eventStartDate ? eventStartDate.toISOString().split('T')[0] : '',
-            eventEndDate: eventEndDate ? eventEndDate.toISOString().split('T')[0] : '',
-            registrationStartDate: registrationStartDate ? registrationStartDate.toISOString().split('T')[0] : '',
-            registrationEndDate: registrationEndDate ? registrationEndDate.toISOString().split('T')[0] : '',
-            departments: selectedDepartments,
-            teamSize,
-            eventLink,
-            eventNotice,
-            eventMode
-        };
-        // const handleSubmit = (event) => {
-        //     event.preventDefault();
-        //     const eventData = new FormData();
-        //     eventData.append('name', name);
-        //     eventData.append('description', description);
-        //     eventData.append('eventStartDate', eventStartDate ? eventStartDate.toISOString().split('T')[0] : '');
-        //     eventData.append('eventEndDate', eventEndDate ? eventEndDate.toISOString().split('T')[0] : '');
-        //     eventData.append('registrationStartDate', registrationStartDate ? registrationStartDate.toISOString().split('T')[0] : '');
-        //     eventData.append('registrationEndDate', registrationEndDate ? registrationEndDate.toISOString().split('T')[0] : '');
-        //     eventData.append('departments', selectedDepartments);
-        //     eventData.append('teamSize', teamSize);
-        //     eventData.append('eventLink', eventLink);
-        //     eventData.append('eventMode', eventMode); // Append event mode to form data
-        //     if (eventNotice) {
-        //         eventData.append('eventNotice', eventNotice);
-        //     }
-    
+        const eventData = new FormData();
+        eventData.append('name', name);
+        eventData.append('description', description);
+        eventData.append('eventStartDate', eventStartDate ? eventStartDate.toISOString().split('T')[0] : '');
+        eventData.append('eventEndDate', eventEndDate ? eventEndDate.toISOString().split('T')[0] : '');
+        eventData.append('registrationStartDate', registrationStartDate ? registrationStartDate.toISOString().split('T')[0] : '');
+        eventData.append('registrationEndDate', registrationEndDate ? registrationEndDate.toISOString().split('T')[0] : '');
+        eventData.append('departments', selectedDepartments);
+        eventData.append('teamSize', teamSize);
+        eventData.append('eventLink', eventLink);
+        eventData.append('eventMode', eventMode);
+        if (eventNotice) {
+            eventData.append('eventNotice', eventNotice);
+        }
+        if (eventImage) {  
+            eventData.append('eventImage', eventImage);
+        }
 
         console.log('Event Data:', eventData);
-        axios.post('https://event-upload-admin/events', eventData,{
+        axios.post('http://localhost:8081/events/upload', eventData,{
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -90,6 +80,9 @@ export default function EventUploadForm() {
                 setEventLink("");
                 setEventNotice(null);
                 setEventMode("");
+                setEventImage(null);
+
+                navigate('/events')
             })
             .catch(error => {
                 if (error.response) {
@@ -101,6 +94,19 @@ export default function EventUploadForm() {
                 }
             });
     };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (file && !validImageTypes.includes(file.type)) {
+            setImageError("Please upload a valid image file (jpg, jpeg, or png).");
+            setEventImage(null);
+        } else {
+            setImageError("");
+            setEventImage(file);
+        }
+    };
+
     return (
         <div className='eventUploadForm'>
             <form className='uploadform' onSubmit={handleSubmit}>
@@ -130,6 +136,16 @@ export default function EventUploadForm() {
                         type='file'
                         onChange={(e) => setEventNotice(e.target.files[0])}
                     />
+                </label>
+                <label>
+                    <p>Event Image:</p>
+                    <input
+                        className='box'
+                        type='file'
+                        accept=".jpg, .jpeg, .png"
+                        onChange={handleImageChange}  
+                    />
+                    {imageError && <p className="error" style={{color: "red"}}>{imageError}</p>}
                 </label>
                 <label>
                     <p>Event Start Date:</p>
@@ -182,7 +198,8 @@ export default function EventUploadForm() {
                         dropdownMode="select"
                         placeholderText="MM/DD/YYYY"
                     />
-                    <div className='radio-group'>
+                </label>
+                <div className='radio-group'>
                     <p>Select Event Mode:</p>
                     <label>
                         <input
@@ -203,7 +220,6 @@ export default function EventUploadForm() {
                         Offline
                     </label>
                 </div>
-                </label>
                 <div className='checkbox-group'>
                     <p>Select Departments:</p>
                     {departments.map((department, index) => (
@@ -242,10 +258,10 @@ export default function EventUploadForm() {
                         onChange={(e) => setEventLink(e.target.value)}
                     />
                 </label>
-                
-                
                 <button type='submit'>Submit</button>
             </form>
         </div>
     );
 }
+
+export default EventUploadForm

@@ -8,12 +8,15 @@ import Events from './Admin/Events';
 import Horinav from './Components/Horinav';
 import Sidenav from './Components/Sidenav';
 import EventUploadForm from './Admin/EventUploadForm';
+import EventDetails from './Admin/EventDetails';
 
 function App() {
   const [role, setRole] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1370);
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
+
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     axios.get('http://localhost:8081/')
@@ -31,7 +34,7 @@ function App() {
     axios.get('http://localhost:8081/logout')
       .then(res => {
         if (res.data.message) {
-          setRole(''); 
+          setRole('');
           navigate('/login');
         }
       })
@@ -69,6 +72,7 @@ function App() {
           <Route path='/home' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path="/upload" element={<EventUploadForm />} />
+          <Route path="/details/:id" element={<EventDetails />} />
         </Routes>
       </div>
     </div>

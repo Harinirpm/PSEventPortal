@@ -1,0 +1,40 @@
+.event-details .event-image{
+    width: 250px;
+    height: 250px;
+    display: block;
+}
+.event-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-details button {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-left: auto; 
+}
+
+.event-details .title {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.event-details .title a {
+    display: flex;
+    align-items: center; 
+    text-decoration: none; 
+}
+
+.event-details .title h1 {
+    margin: 0; 
+}
+
