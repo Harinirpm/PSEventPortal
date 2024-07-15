@@ -41,3 +41,8 @@ export const getEventById = (id, callback) => {
         callback(null, event);
     });
 };
+
+export const updateEventById = (id, eventData, callback) => {
+    const sql = 'UPDATE events SET ? WHERE id = ?';
+    db.query(sql, [eventData, id], callback);
+};

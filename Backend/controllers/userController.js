@@ -19,7 +19,7 @@ export const loginUser = (req, res) => {
 };
 
 export const checkSession = (req, res) => {
-    console.log('Session check:', req.session);
+    //console.log('Session check:', req.session);
     if (req.session.role) {
         return res.json({ valid: true, role: req.session.role });
     } else {

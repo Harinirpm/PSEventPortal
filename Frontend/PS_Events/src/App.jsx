@@ -9,6 +9,7 @@ import Horinav from './Components/Horinav';
 import Sidenav from './Components/Sidenav';
 import EventUploadForm from './Admin/EventUploadForm';
 import EventDetails from './Admin/EventDetails';
+import EventUpdateForm from './Admin/EventUpdateForm';
 
 function App() {
   const [role, setRole] = useState('');
@@ -73,6 +74,8 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path="/upload" element={<EventUploadForm />} />
           <Route path="/details/:id" element={<EventDetails />} />
+          <Route path="/update/:id" element={<EventUpdateForm />} />
+
         </Routes>
       </div>
     </div>
