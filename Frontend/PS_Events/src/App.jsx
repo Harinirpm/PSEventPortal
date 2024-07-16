@@ -8,8 +8,9 @@ import Events from './Admin/Events';
 import Horinav from './Components/Horinav';
 import Sidenav from './Components/Sidenav';
 import EventUploadForm from './Admin/EventUploadForm';
-import EventDetails from './Admin/EventDetails';
+import EventDetails1 from './Admin/EventDetails';
 import EventUpdateForm from './Admin/EventUpdateForm';
+import EventDetails2 from './Students/EventDetails';
 
 function App() {
   const [role, setRole] = useState('');
@@ -66,16 +67,16 @@ function App() {
           <Sidenav isOpen={isSidebarOpen} role={role} handleLogout={handleLogout} />
         </>
       )}
-      <div className={shouldApplyLayout ? (isSidebarOpen ? "content" : "content-collapsed") : ""}>
+      <div className={shouldApplyLayout ? (window.innerWidth >= 1370 ? "content" : "content-collapsed") : ""}>
         <Routes>
           <Route path='/' element={<Home role={role} />}></Route>
           <Route path='/events' element={<Events />}></Route>
           <Route path='/home' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path="/upload" element={<EventUploadForm />} />
-          <Route path="/details/:id" element={<EventDetails />} />
+          <Route path="/details/:id" element={<EventDetails1 />} />
           <Route path="/update/:id" element={<EventUpdateForm />} />
-
+          <Route path="/events/:id" element={<EventDetails2 />} />
         </Routes>
       </div>
     </div>

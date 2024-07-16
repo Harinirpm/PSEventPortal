@@ -1,4 +1,5 @@
-import { createEvent, getAllEvents, getEventById, updateEventById } from '../models/eventModel.js';
+import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel } from '../models/eventModel.js';
+import { getStudentByEmail } from '../models/studentModel.js';
 import multer from 'multer';
 import path from 'path';
 import { formatISO } from 'date-fns';
@@ -98,3 +99,39 @@ export const updateEvent = (req, res) => {
         res.status(200).json({ message: 'Event updated successfully' });
     });
 };
+
+export const getStudentEvents = (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    getStudentByEmail(email, (err, studentResults) => {
+        if (err) {
+            console.error('Error retrieving student data:', err);
+            return res.status(500).json({ error: 'Failed to retrieve student data' });
+        }
+
+        if (studentResults.length === 0) {
+            return res.status(404).json({ error: 'Student not found' });
+        }
+
+        const studentData = studentResults[0];
+        const department = studentData.department;
+
+        getEventsByDepartmentFromModel(department, (err, eventsResults) => {
+            if (err) {
+                console.error('Error retrieving events by department:', err);
+                return res.status(500).json({ error: 'Failed to retrieve events' });
+            }
+
+            res.status(200).json({
+                department,
+                events: eventsResults
+            });
+        });
+    });
+};
+
+
