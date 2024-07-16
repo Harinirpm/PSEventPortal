@@ -1,20 +1,27 @@
 /* EventUploadForm.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 .eventUploadForm {
     position: relative;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 19px 1px rgb(177, 177, 177);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(214, 214, 214, 0.5) 2px 1px 20;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     /* margin: 0 auto; */
-    padding: 20px;
-    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    height: max-content;
+    max-width: calc(100% - 10px);
+    margin: 5px;
+    border: 0.5px;
+    
+   
+    
 }
-
-.eventUploadForm .box {
-    letter-spacing: 1px;
-    margin-bottom: 30px;
+.eventUploadForm .uploadform p{
+    font-family: 'Roboto', sans-serif;
 }
 
 .eventUploadForm input,
@@ -22,45 +29,59 @@
 .eventUploadForm select{
     display: flex;
     flex-direction: column;
-    width: 92%;
+    width: 100%;
     position: relative;
     padding: 10px;
     border-radius: 5px;
     text-overflow: inherit;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 15px;
     box-sizing: border-box;
     overflow-wrap: break-word;
     resize: vertical;
-    border: 3px solid rgb(173, 172, 172);
+    border: 1px solid rgb(173, 172, 172);
+    font-family: 'Roboto', sans-serif;
+    
+    
+}
+.eventUploadForm input:focus{
+    border: 3px solid rgb(46, 131, 243);
+    outline: none;
+}
+.eventUploadForm select.gray-text {
+    color: gray;
+    width: 100%;
 }
 
 .eventUploadForm .para {
     height: 150px;
-    width: 91.5%;
+    width: 100%;
     font-size: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-top: 10px;
     border-radius: 5px;
     box-sizing: border-box;
     overflow-wrap: break-word;
     resize: vertical;
-    border: 3px solid rgb(173, 172, 172);
+    border: 1px solid rgb(173, 172, 172);
+    font-family: 'Roboto', sans-serif;
+    
 }
 
 .eventUploadForm label {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #030303;
+    margin-bottom: 1px;
+    color: grey;
     display: flex;
     flex-direction: column;
+    
 }
 
 .eventUploadForm button {
-    width: 40%;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
+    align-items: center;
     color: #fff;
     background-color: #007bff;
     border: none;
@@ -68,11 +89,14 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+   
+    font-family: 'Roboto', sans-serif;
+    
 }
 
-.eventUploadForm button:hover {
+/* .eventUploadForm button:hover {
     background-color: #0056b3;
-}
+} */
 
 .eventUploadForm .checkbox-group {
     display: flex;
@@ -85,9 +109,10 @@
 .eventUploadForm .checkbox-group p {
     margin-top: 1px;
     margin-bottom: 30px;
-    font-size: 19px;
-    font-weight: 900;
-    color: #030303;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(15, 15, 15);
+    font-family: 'Roboto', sans-serif;
     width: 100%;
 }
 
@@ -147,24 +172,26 @@
 }
 .eventUploadForm  p{
     margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 19px;
-    font-weight: 900;
-    color: #030303;
+    margin-bottom: 1px;
+    font-size: 15px;
+    /* font-weight: 100; */
+    color: grey;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 .eventUploadForm .radio-group {
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .eventUploadForm .radio-group p {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 19px;
-    font-weight: 900;
-    color: #030303;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(8, 8, 8);
+    font-family: 'Roboto', sans-serif;
 }
 
 .eventUploadForm .radio-group label {

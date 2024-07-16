@@ -4,8 +4,19 @@
     display: block;
 }
 .event-details {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 19px 1px rgb(177, 177, 177);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    /* margin: 0 auto; */
+    padding: 50px;
+    border-radius: 10px;
+    margin-left: 6%;
+    margin-top: 6%;
+    
 }
 
 .event-details button {
@@ -19,22 +30,31 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
-    margin-left: auto; 
+    margin-left: 650px; 
+    
 }
 
 .event-details .title {
     display: flex;
-    align-items: center;
+    margin-right: 10px;
     gap: 10px; 
+    margin-bottom: 6%;
+    color: rgb(33, 133, 248);
+   
 }
 
 .event-details .title a {
     display: flex;
     align-items: center; 
     text-decoration: none; 
+    margin-left: 10px;
 }
 
 .event-details .title h1 {
+    margin: 0; 
+
+}
+.event-details .title p {
     margin: 0; 
 }
 

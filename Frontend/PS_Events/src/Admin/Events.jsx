@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Events.css';
+import { CiCirclePlus } from "react-icons/ci";
 
 const Events = () => {
     const [events, setEvents] = useState([]);
@@ -21,9 +22,10 @@ const Events = () => {
 
     return (
         <div className="event">
-            <h1>Landing Page</h1>
+            <h2>Event Upload</h2>
+            <br></br>
             <Link to="/upload">
-                <button className='navigate-button'>Create Event</button>
+                <button className='navigate-button'>Create Event<CiCirclePlus className="circle-icon"/></button>
             </Link>
             <div className="event-cards">
                 {events.map(event => (
@@ -36,7 +38,7 @@ const Events = () => {
                                     className="event-image"
                                 />
                             )}
-                            <h2>{event.name}</h2>
+                            <h2 className="event-text">{event.name}</h2>
                         </Link>
                     </div>
                 ))}

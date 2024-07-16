@@ -48,19 +48,20 @@ const EventDetails = () => {
       </Link>
       <h1>{event.name}</h1>
       </div>
-      <p>Description: {event.description}</p>
-      <p>Event Start Date: {formatDate(event.eventStartDate)}</p>
-      <p>Event End Date: {formatDate(event.eventEndDate)}</p>
-      <p>Registration Start Date: {formatDate(event.registrationStartDate)}</p>
-      <p>Registration End Date: {formatDate(event.registrationEndDate)}</p>
-      <p>Departments: {departments}</p>
-      <p>Team Size: {event.teamSize}</p>
-      <p>Event Mode: {event.eventMode}</p>
-      <p>Event Link: <a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></p>
-      {noticeUrl && <p>Event Notice: <a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></p>}
-      {imageUrl && <p>Event Image:<img src={imageUrl} alt={event.name} className="event-image" /></p>}
+      <h3>Description:</h3><p>{event.description}</p>
+      <h3>Event Start Date: </h3><p>{formatDate(event.eventStartDate)}</p>
+      <h3>Event End Date:</h3> <p>{formatDate(event.eventEndDate)}</p>
+      <h3>Registration Start Date:</h3><p>{formatDate(event.registrationStartDate)}</p>
+      <h3>Registration End Date:</h3><p> {formatDate(event.registrationEndDate)}</p>
+      <h3 >Departments: </h3><p>{departments}</p>
+      <h3>Team Size:</h3> <p>{event.teamSize}</p>
+      <h3>Event Mode: </h3><p>{event.eventMode}</p>
+      <h3>Event Link:<br></br><br></br><a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></h3>
+      {noticeUrl && <h3>Event Notice:<br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
+      {imageUrl && <h3>Event Image:<br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
       <button>Update</button>
-    </div>
+      </div>
+
   );
 }
 
