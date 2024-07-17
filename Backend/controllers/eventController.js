@@ -1,4 +1,4 @@
-import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel } from '../models/eventModel.js';
+import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel, getTeamsForEvent, getTeamDetails,approveTeamInModel, rejectTeamInModel  } from '../models/eventModel.js';
 import { getStudentByEmail } from '../models/studentModel.js';
 import multer from 'multer';
 import path from 'path';
@@ -134,7 +134,36 @@ export const getStudentEvents = (req, res) => {
     });
 };
 
+export const fetchTeamsForEvent = (req, res) => {
+    const { eventName } = req.params;
+    getTeamsForEvent(eventName, (err, teams) => {
+        if (err) return res.status(500).json({ error: 'Database error fetching teams' });
+        res.status(200).json(teams);
+    });
+};
 
-  
-  
+export const fetchTeamDetails = (req, res) => {
+    const { eventId, teamName } = req.params;
+    getTeamDetails(eventId, teamName, (err, teamDetails) => {
+        if (err) return res.status(500).json({ error: 'Database error fetching team details' });
+        if (!teamDetails) return res.status(404).json({ error: 'Team not found' });
+        res.status(200).json(teamDetails);
+    });
+};
 
+export const approveTeam = (req, res) => {
+    const { eventId, teamName } = req.params;
+    approveTeamInModel(eventId, teamName, (err) => {
+      if (err) return res.status(500).json({ error: 'Internal server error' });
+      res.json({ message: 'Team approved successfully' });
+    });
+  };
+  
+  export const rejectTeam = (req, res) => {
+    const { eventId, teamName } = req.params;
+    const { rejectionReason } = req.body;
+    rejectTeamInModel(eventId, teamName, rejectionReason, (err) => {
+      if (err) return res.status(500).json({ error: 'Internal server error' });
+      res.json({ message: 'Team rejected successfully' });
+    });
+  };

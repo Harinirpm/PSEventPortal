@@ -35,13 +35,12 @@ const TeamMemberDetails = ({ formData, setFormData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedMembers = [...formData.teamMembers]; // Copy the array
+    const updatedMembers = [...formData.teamMembers]; 
     updatedMembers[parseInt(memberIndex, 10) - 1] = memberData;
     setFormData({ ...formData, teamMembers: updatedMembers });
 
     setMemberData(initialMemberData);
 
-    // If teamSize is 3, then we should navigate to team member 2, and then verification
     if (parseInt(memberIndex, 10) < formData.initialData.teamSize - 1) {
       navigate(`/team-members/${parseInt(memberIndex, 10) + 1}`);
     } else {
@@ -53,8 +52,8 @@ const TeamMemberDetails = ({ formData, setFormData }) => {
     if (parseInt(memberIndex, 10) > 1) {
       navigate(`/team-members/${parseInt(memberIndex, 10) - 1}`);
     } else {
-      const eventName = formData.initialData.eventName; // Retrieve eventName from formData
-      navigate(`/eventregister/${eventName}`); // Navigate to the registration page with eventName
+      const eventName = formData.initialData.eventName;
+      navigate(`/eventregister/${eventName}`);
     }
   };
 
