@@ -1,47 +1,44 @@
-import React, { useState } from 'react';
-import img from './assets/Google.png';
-import img1 from "./assets/event.png";
-import './Login.css';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { UserContext } from './UserContext';
+import img from './assets/Google.png';
+import './Login.css';
 
 function Login() {
     const [values, setValues] = useState({
         email: '',
         password: ''
-    })
+    });
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    axios.defaults.withCredentials = true;
 
-    axios.defaults.withCredentials = true
-
-    useEffect(()=>{
+    useEffect(() => {
         axios.get('http://localhost:8081/')
-        .then(res=>{
-           if(res.data.valid){
-            navigate('/')
-           }
-           else{
-            navigate('/login')
-           }
-        })
-        .catch(err=>console.log(err))
+            .then(res => {
+                if (res.data.valid) {
+                    navigate('/');
+                } else {
+                    navigate('/login');
+                }
+            })
+            .catch(err => console.log(err));
+    }, [navigate]);
 
-    }, [])
-  
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('http://localhost:8081/login', values)
-        .then(res => {
-            if(res.data.Status === "Success") {
-                navigate('/')
-            }
-            else{
-                alert(res.data.Error);
-            }
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                if (res.data.Status === "Success") {
+                    setUser({ email: values.email });
+                    navigate('/');
+                } else {
+                    alert(res.data.Error);
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -63,10 +60,7 @@ function Login() {
                         </div>
                         <button type="submit" className="login-button">Login</button>
                         <button type="button" className="google-signin">
-                            <img
-                                src={img}
-                                alt="Google Logo"
-                            />
+                            <img src={img} alt="Google Logo" />
                             Sign in with Google
                         </button>
                     </form>

@@ -1,0 +1,214 @@
+.eventUpdateForm{
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(214, 214, 214, 0.5) 2px 1px 20;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    /* margin: 0 auto; */
+    padding: 15px;
+    box-sizing: border-box;
+    height: max-content;
+    max-width: calc(100% - 10px);
+    margin: 5px;
+    border: 0.5px;
+    
+}
+.eventUpdateForm .updateform p{
+    font-family: 'Roboto', sans-serif;
+}
+.eventUpdateForm input,
+.eventUpdateForm .box 
+.eventUpdateForm select{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    padding: 12px 12px 12px 5px;
+    border-radius: 5px;
+    text-overflow: inherit;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    resize: vertical;
+    border: 1px solid rgb(173, 172, 172);
+    font-family: 'Roboto', sans-serif;
+}
+.eventUpdateForm input:focus{
+    border: 3px solid rgb(46, 131, 243);
+    outline: none;
+}
+.eventUpdateForm select.gray-text {
+    color: gray;
+    width: 100%;
+}
+.eventUpdateForm .para {
+    height: 150px;
+    width: 100%;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    resize: vertical;
+    border: 1px solid rgb(173, 172, 172);
+    font-family: 'Roboto', sans-serif;
+    
+}
+.eventUpdateForm label {
+    margin-bottom: 1px;
+    margin-top: 10px;
+    color: grey;
+    display: flex;
+    flex-direction: column;
+    
+}
+.eventUpdateForm button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    align-items: center;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+   
+    font-family: 'Roboto', sans-serif;
+    
+}
+.eventUpdateForm .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.eventUpdateForm .checkbox-group p {
+    margin-top: 1px;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(15, 15, 15);
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+.eventUpdateForm .checkbox-group label {
+    display: block; 
+    margin-bottom: 10px;
+}
+
+.eventUpdateForm .checkbox-group input {
+    display: none; 
+}
+
+.eventUpdateForm .checkbox-group input + span {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    margin-right: 10px; 
+    cursor: pointer;
+    display: inline-block; 
+    vertical-align: middle; 
+    position: relative;
+}
+
+.eventUpdateForm .checkbox-group input:checked + span {
+    background-color: green;
+    border-color: green;
+}
+
+.eventUpdateForm .checkbox-group input + span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+}
+
+.eventUpdateForm .checkbox-group input:checked + span:after {
+    opacity: 1;
+}
+.eventUpdateForm select {
+    width: 92%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.eventUpdateForm .radio-group {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.eventUpdateForm .radio-group p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(8, 8, 8);
+    font-family: 'Roboto', sans-serif;
+}
+
+.eventUpdateForm .radio-group label {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.eventUpdateForm .radio-group input[type="radio"] {
+    display: none; 
+}
+
+.eventUpdateForm .radio-group input[type="radio"] + span {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: white;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.eventUpdateForm .radio-group input[type="radio"]:checked + span {
+    background-color: green;
+    border-color: green;
+}
+
+.eventUpdateForm .radio-group input[type="radio"] + span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+    
+}
+
+.eventUpdateForm .radio-group input[type="radio"]:checked + span:after {
+    opacity: 1;
+}

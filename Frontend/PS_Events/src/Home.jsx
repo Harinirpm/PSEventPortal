@@ -1,7 +1,7 @@
 import React from "react";
 import Admin from "./Admin";
 import './Home.css';
-import Students from "./Students";
+import Students from "./Students/Students";
 
 
 function Home({role}) {   

@@ -1,6 +1,8 @@
-import { createEvent, getAllEvents, getEventById  } from '../models/eventModel.js';
+import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel } from '../models/eventModel.js';
+import { getStudentByEmail } from '../models/studentModel.js';
 import multer from 'multer';
 import path from 'path';
+import { formatISO } from 'date-fns';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -12,6 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 export const uploadEventFiles = upload.fields([
     { name: 'eventNotice', maxCount: 1 },
     { name: 'eventImage', maxCount: 1 }
@@ -25,8 +28,6 @@ export const handleEventUpload = (req, res) => {
     if (req.files['eventImage']) {
         eventData.eventImage = req.files['eventImage'][0].path.replace(/\\/g, '/');
     }
-
-    //console.log('Received Event Data:', eventData);
 
     createEvent(eventData, (err, result) => {
         if (err) {
@@ -43,7 +44,6 @@ export const getEvents = (req, res) => {
             console.error('Error retrieving events:', err);
             res.status(500).json({ error: 'Failed to retrieve events' });
         } else {
-            console.log(results)
             res.status(200).json(results);
         }
     });
@@ -62,3 +62,76 @@ export const getEvent = (req, res) => {
         res.status(200).json(event);
     });
 };
+
+export const updateEvent = (req, res) => {
+    const { id } = req.params;
+    const eventData = req.body;
+
+    // Convert dates to MySQL acceptable format
+    if (eventData.eventStartDate) {
+        eventData.eventStartDate = formatISO(new Date(eventData.eventStartDate), { representation: 'date' });
+    }
+    if (eventData.eventEndDate) {
+        eventData.eventEndDate = formatISO(new Date(eventData.eventEndDate), { representation: 'date' });
+    }
+    if (eventData.registrationStartDate) {
+        eventData.registrationStartDate = formatISO(new Date(eventData.registrationStartDate), { representation: 'date' });
+    }
+    if (eventData.registrationEndDate) {
+        eventData.registrationEndDate = formatISO(new Date(eventData.registrationEndDate), { representation: 'date' });
+    }
+
+    if (req.files['eventNotice']) {
+        eventData.eventNotice = req.files['eventNotice'][0].path.replace(/\\/g, '/');
+    }
+    if (req.files['eventImage']) {
+        eventData.eventImage = req.files['eventImage'][0].path.replace(/\\/g, '/');
+    }
+
+    updateEventById(id, eventData, (err, result) => {
+        if (err) {
+            console.error('Error updating event:', err);
+            return res.status(500).json({ error: 'Failed to update event' });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Event not found' });
+        }
+        res.status(200).json({ message: 'Event updated successfully' });
+    });
+};
+
+export const getStudentEvents = (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    getStudentByEmail(email, (err, studentResults) => {
+        if (err) {
+            console.error('Error retrieving student data:', err);
+            return res.status(500).json({ error: 'Failed to retrieve student data' });
+        }
+
+        if (studentResults.length === 0) {
+            return res.status(404).json({ error: 'Student not found' });
+        }
+
+        const studentData = studentResults[0];
+        const department = studentData.department;
+
+        getEventsByDepartmentFromModel(department, (err, eventsResults) => {
+            if (err) {
+                console.error('Error retrieving events by department:', err);
+                return res.status(500).json({ error: 'Failed to retrieve events' });
+            }
+
+            res.status(200).json({
+                department,
+                events: eventsResults
+            });
+        });
+    });
+};
+
+

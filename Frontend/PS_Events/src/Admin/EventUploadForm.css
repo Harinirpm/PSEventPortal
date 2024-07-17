@@ -16,9 +16,6 @@
     max-width: calc(100% - 10px);
     margin: 5px;
     border: 0.5px;
-    
-   
-    
 }
 .eventUploadForm .uploadform p{
     font-family: 'Roboto', sans-serif;
@@ -42,8 +39,6 @@
     resize: vertical;
     border: 1px solid rgb(173, 172, 172);
     font-family: 'Roboto', sans-serif;
-    
-    
 }
 .eventUploadForm input:focus{
     border: 3px solid rgb(46, 131, 243);

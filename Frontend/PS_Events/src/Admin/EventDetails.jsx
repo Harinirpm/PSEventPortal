@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import './EventDetails.css'
+import './EventDetails.css';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -16,7 +15,6 @@ const EventDetails = () => {
   const fetchEventDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:8081/events/${id}`);
-      console.log('Fetched Event Data:', response.data); // Log the response data
       setEvent(response.data);
     } catch (error) {
       console.error('Error fetching event details:', error);
@@ -41,12 +39,14 @@ const EventDetails = () => {
   const noticeUrl = event.eventNotice ? `http://localhost:8081/${event.eventNotice.replace(/\\/g, '/')}` : null;
 
   return (
+    <>
+    <h1>Event Details</h1>
     <div className="event-details">
       <div className="title">
         <Link to={`/events`}>
-      <FaArrowCircleLeft  size={18} color="black"/>
-      </Link>
-      <h1>{event.name}</h1>
+          <FaArrowCircleLeft size={28} color="black"/>
+        </Link>
+        <h1>{event.name}</h1>
       </div>
       <h3>Description:</h3><p>{event.description}</p>
       <h3>Event Start Date: </h3><p>{formatDate(event.eventStartDate)}</p>
@@ -59,10 +59,15 @@ const EventDetails = () => {
       <h3>Event Link:<br></br><br></br><a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></h3>
       {noticeUrl && <h3>Event Notice:<br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
       {imageUrl && <h3>Event Image:<br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
-      <button>Update</button>
-      </div>
 
+      <div className="button-1">
+      <Link to={`/update/${id}`}>
+        <button>Update</button>
+      </Link>
+      </div>
+    </div>
+</>
   );
-}
+};
 
 export default EventDetails;
