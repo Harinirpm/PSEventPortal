@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import { FaArrowCircleLeft } from "react-icons/fa";
-//import './EventDetails.css';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -63,8 +62,11 @@ const EventDetails = () => {
       <p><strong>Event Link:</strong> <a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink || 'N/A'}</a></p>
       {noticeUrl && <p><strong>Event Notice:</strong> <a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></p>}
       {imageUrl && <p><strong>Event Image:</strong><img src={imageUrl} alt={event.name} className="event-image" /></p>}
+      
       <div className="button-1">
+        <Link to={`/eventregister/${event.name}`}>
           <button>Register</button>
+        </Link>
       </div>
     </div>
   );

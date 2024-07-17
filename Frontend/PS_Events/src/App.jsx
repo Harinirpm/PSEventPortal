@@ -11,8 +11,15 @@ import EventUploadForm from './Admin/EventUploadForm';
 import EventDetails1 from './Admin/EventDetails';
 import EventUpdateForm from './Admin/EventUpdateForm';
 import EventDetails2 from './Students/EventDetails';
+import EventRegister from './Students/EventRegister';
+import TeamMemberDetails from './Students/TeamMemberDetails';
+import VerifyData from './Students/VerifyData';
 
 function App() {
+  const [formData, setFormData] = useState({
+    initialData: {},
+    teamMembers: [],
+  });
   const [role, setRole] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1370);
   const navigate = useNavigate();
@@ -77,6 +84,9 @@ function App() {
           <Route path="/details/:id" element={<EventDetails1 />} />
           <Route path="/update/:id" element={<EventUpdateForm />} />
           <Route path="/events/:id" element={<EventDetails2 />} />
+          <Route path="/eventregister/:eventName" element={<EventRegister formData={formData} setFormData={setFormData} />} />
+        <Route path="/team-members/:memberIndex" element={<TeamMemberDetails formData={formData} setFormData={setFormData} />} />
+        <Route path="/verify" element={<VerifyData formData={formData} />} />
         </Routes>
       </div>
     </div>
