@@ -153,6 +153,7 @@ const EventUpdateForm = () => {
                         onChange={handleChange}
                     />
                 </label>
+                <div className="event-dates">
                 <label>
                     Event Start Date:
                     <DatePicker
@@ -179,6 +180,8 @@ const EventUpdateForm = () => {
                         placeholderText="MM/DD/YYYY"
                     />
                 </label>
+                </div>
+                <div className="register-dates">
                 <label>
                     Registration Start Date:
                     <DatePicker
@@ -205,6 +208,7 @@ const EventUpdateForm = () => {
                         placeholderText="MM/DD/YYYY"
                     />
                 </label>
+                </div>
                 <label>
                     Team Size:
                     <select

@@ -1,0 +1,92 @@
+.verify-data {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(214, 214, 214, 0.5) 2px 1px 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 20px auto;
+    
+  }
+  
+  .verify-data h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .verify-data .confirmation-checkbox {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .verify-data .confirmation-checkbox input {
+    margin-right: 10px;
+  }
+  
+  .verify-data .confirmation-checkbox label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .verify-data button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    align-items: center;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  
+  .verify-data button[type="button"]:not(:last-child) {
+    background-color: #6c757d;
+    margin-bottom: 10px;
+  }
+  
+  .verify-data button:hover {
+    background-color: #0056b3;
+  }
+  
+  .verify-data button[type="button"]:not(:last-child):hover {
+    background-color: #5a6268;
+  }
+  
+  .verify-data pre {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    max-height: 200px;
+    overflow-y: auto;
+    font-weight: 500;
+  }
+  
+  .verify-data pre code {
+    font-family: 'Roboto', sans-serif;
+    color: #212529;
+    font-weight: 500;
+  }
+  
+  .verify-data div[style="color: red;"] {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  

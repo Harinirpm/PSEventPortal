@@ -21,7 +21,7 @@
     width: 100%;
     max-width: 1000px;
     font-family: 'Roboto', sans-serif;
-    
+   
 }
 .event-details h3 {
     font-family: 'Roboto', sans-serif;
@@ -30,6 +30,8 @@
   }
 .event-details .button-1{
      margin-left: auto; 
+     font-family: 'Roboto', sans-serif; 
+     font-weight: 500;
 }
 
 .event-details  button{
@@ -43,6 +45,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
     
     
 }
@@ -53,7 +57,9 @@
     gap: 10px; 
     margin-bottom: 6%;
     /* color: rgb(33, 133, 248); */
-    color: gray;
+    color: rgb(46, 46, 46);
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
    
 }
 
@@ -62,9 +68,11 @@
     align-items: center; 
     text-decoration: none; 
     margin-left: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
     
 }
+
 
 .event-details .title h1 {
     margin: 0; 
@@ -77,4 +85,3 @@
     font-family: 'Roboto', sans-serif;
     color: gray;
 }
-

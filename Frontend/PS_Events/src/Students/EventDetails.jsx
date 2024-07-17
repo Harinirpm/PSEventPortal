@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import { FaArrowCircleLeft } from "react-icons/fa";
 
+
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -51,17 +52,17 @@ const EventDetails = () => {
         </Link>
         <h1>{event.name}</h1>
       </div>
-      <p><strong>Description:</strong> {event.description || 'N/A'}</p>
-      <p><strong>Event Start Date:</strong> {formatDate(event.eventStartDate)}</p>
-      <p><strong>Event End Date:</strong> {formatDate(event.eventEndDate)}</p>
-      <p><strong>Registration Start Date:</strong> {formatDate(event.registrationStartDate)}</p>
-      <p><strong>Registration End Date:</strong> {formatDate(event.registrationEndDate)}</p>
-      <p><strong>Departments:</strong> {departments}</p>
-      <p><strong>Team Size:</strong> {event.teamSize || 'N/A'}</p>
-      <p><strong>Event Mode:</strong> {event.eventMode || 'N/A'}</p>
-      <p><strong>Event Link:</strong> <a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink || 'N/A'}</a></p>
-      {noticeUrl && <p><strong>Event Notice:</strong> <a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></p>}
-      {imageUrl && <p><strong>Event Image:</strong><img src={imageUrl} alt={event.name} className="event-image" /></p>}
+      <h3><strong>Description:</strong></h3><p>{event.description || 'N/A'}</p>
+      <h3><strong>Event Start Date:</strong></h3><p> {formatDate(event.eventStartDate)}</p>
+      <h3><strong>Event End Date:</strong></h3><p> {formatDate(event.eventEndDate)}</p>
+      <h3><strong>Registration Start Date:</strong></h3><p> {formatDate(event.registrationStartDate)}</p>
+      <h3><strong>Registration End Date:</strong></h3><p> {formatDate(event.registrationEndDate)}</p>
+      <h3><strong>Departments:</strong></h3><p> {departments}</p>
+      <h3><strong>Team Size:</strong></h3><p> {event.teamSize || 'N/A'}</p>
+      <h3><strong>Event Mode:</strong></h3><p> {event.eventMode || 'N/A'}</p>
+      <h3><strong>Event Link:</strong></h3><p> <a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink || 'N/A'}</a></p>
+      {noticeUrl && <h3><strong>Event Notice:</strong><br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
+      {imageUrl && <h3><strong>Event Image:</strong><br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
       
       <div className="button-1">
         <Link to={`/eventregister/${event.name}`}>

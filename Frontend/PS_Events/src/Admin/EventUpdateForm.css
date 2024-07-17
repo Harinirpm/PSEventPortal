@@ -29,7 +29,7 @@
     padding: 12px 12px 12px 5px;
     border-radius: 5px;
     text-overflow: inherit;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-size: 15px;
     box-sizing: border-box;
@@ -38,6 +38,22 @@
     border: 1px solid rgb(173, 172, 172);
     font-family: 'Roboto', sans-serif;
 }
+.eventUpdateForm .register-dates {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.eventUpdateForm .register-dates label{
+    width: 50%;
+}
+.eventUpdateForm .event-dates {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.eventUpdateForm .event-dates label{
+    width: 50%;
+}
 .eventUpdateForm input:focus{
     border: 3px solid rgb(46, 131, 243);
     outline: none;
@@ -45,6 +61,7 @@
 .eventUpdateForm select.gray-text {
     color: gray;
     width: 100%;
+   
 }
 .eventUpdateForm .para {
     height: 150px;
@@ -66,6 +83,7 @@
     color: grey;
     display: flex;
     flex-direction: column;
+    font-size: 13px;
     
 }
 .eventUpdateForm button {
@@ -88,19 +106,20 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 30px; */
 }
 
 .eventUpdateForm .checkbox-group p {
-    margin-top: 1px;
-    margin-bottom: 30px;
+    /* margin-top: 1px; */
+    margin-bottom: 20px;
     font-weight: 500;
     font-size: 20px;
     color: rgb(15, 15, 15);
     font-family: 'Roboto', sans-serif;
     width: 100%;
 }
+
 .eventUpdateForm .checkbox-group label {
     display: block; 
     margin-bottom: 10px;
@@ -144,15 +163,16 @@
 .eventUpdateForm .checkbox-group input:checked + span:after {
     opacity: 1;
 }
+
 .eventUpdateForm select {
-    width: 92%;
+    width: 100%;
     padding: 10px;
+    margin-top: 10px;
     border-radius: 5px;
-    margin-top: 20px;
-    margin-bottom: 30px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 13px;
 }
+
 .eventUpdateForm .radio-group {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -169,7 +189,7 @@
 
 .eventUpdateForm .radio-group label {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .eventUpdateForm .radio-group input[type="radio"] {
@@ -183,7 +203,7 @@
     border-radius: 50%;
     background-color: white;
     margin-right: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -206,9 +226,13 @@
     border-width: 0 2px 2px 0;
     transform: translate(-50%, -50%) rotate(45deg);
     opacity: 0;
-    
 }
 
 .eventUpdateForm .radio-group input[type="radio"]:checked + span:after {
     opacity: 1;
+}
+
+.eventUpdateForm .error {
+    color: red;
+    font-size: 14px;
 }

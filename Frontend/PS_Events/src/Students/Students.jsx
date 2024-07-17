@@ -49,26 +49,28 @@ function Students() {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
-            <h1>Welcome</h1>
-            <h2>Events for {department} Department</h2>
+        <>
+        <div className="studentView">  
+            <h1>Welcome!</h1>
+            <h3>Events for {department} Department !</h3>
             <div className="event-cards">
                 {events.length === 0 ? (
                     <p>No events available for your department.</p>
                 ) : (
                     events.map((event) => (
                         <div key={event.id} className="event-card" onClick={() => handleEventClick(event.id)}>
-                            <h3>{event.name}</h3>
-                            <img
+                            <img 
                                 src={`http://localhost:8081/${event.eventImage}`}
                                 alt={event.name}
-                                style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-                            />
+                                className="event-image"
+                                />
+                                <h2 className="event-text">{event.name}</h2>
                         </div>
                     ))
                 )}
             </div>
         </div>
+        </>
     );
 }
 

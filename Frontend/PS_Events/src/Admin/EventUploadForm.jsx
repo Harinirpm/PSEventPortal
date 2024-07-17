@@ -132,7 +132,7 @@ function EventUploadForm() {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </label>
-               
+                <div className='event-dates'>
                 <label>
                     <p>Event Start Date:</p>
                     <DatePicker
@@ -159,6 +159,8 @@ function EventUploadForm() {
                         placeholderText="MM/DD/YYYY"
                     />
                 </label>
+                </div>
+                <div className='register-dates'>
                 <label>
                     <p>Registration Start Date:</p>
                     <DatePicker
@@ -185,6 +187,7 @@ function EventUploadForm() {
                         placeholderText="MM/DD/YYYY"
                     />
                 </label>
+                </div>
                 <label >
                     <p>Team Size:</p>
                     <select

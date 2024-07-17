@@ -1,34 +1,35 @@
-/* EventUploadForm.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 .eventUploadForm {
     position: relative;
     background-color: white;
     border-radius: 8px;
-    box-shadow: rgba(214, 214, 214, 0.5) 2px 1px 20;
+    box-shadow: rgba(214, 214, 214, 0.5) 2px 1px 20px;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 1000px;
-    /* margin: 0 auto; */
     padding: 15px;
     box-sizing: border-box;
     height: max-content;
     max-width: calc(100% - 10px);
-    margin: 5px;
-    border: 0.5px;
+    margin: 5px auto;
+    border: 0.5px solid #ccc;
 }
-.eventUploadForm .uploadform p{
+
+.eventUploadForm .uploadform p {
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 1px;
+    margin-top: 10px;
+    padding: 1px;
 }
 
 .eventUploadForm input,
-.eventUploadForm .box 
-.eventUploadForm select{
+.eventUploadForm .box,
+.eventUploadForm select {
     display: flex;
     flex-direction: column;
     width: 100%;
     position: relative;
-    padding: 10px;
+    padding: 12px 12px 12px 5px;
     border-radius: 5px;
     text-overflow: inherit;
     margin-top: 10px;
@@ -40,10 +41,34 @@
     border: 1px solid rgb(173, 172, 172);
     font-family: 'Roboto', sans-serif;
 }
-.eventUploadForm input:focus{
+
+.eventUploadForm .register-dates {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.eventUploadForm .register-dates label {
+    width: 50%;
+}
+
+.eventUploadForm .event-dates {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.eventUploadForm .event-dates label {
+    width: 50%;
+}
+
+.eventUploadForm input:focus {
     border: 3px solid rgb(46, 131, 243);
     outline: none;
 }
+
 .eventUploadForm select.gray-text {
     color: gray;
     width: 100%;
@@ -61,15 +86,15 @@
     resize: vertical;
     border: 1px solid rgb(173, 172, 172);
     font-family: 'Roboto', sans-serif;
-    
 }
 
 .eventUploadForm label {
-    margin-bottom: 1px;
+    /* margin-bottom: 10px; */
+    /* margin-top: 10px; */
     color: grey;
     display: flex;
     flex-direction: column;
-    
+    font-size: 13px;
 }
 
 .eventUploadForm button {
@@ -84,26 +109,20 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
-   
     font-family: 'Roboto', sans-serif;
-    
 }
-
-/* .eventUploadForm button:hover {
-    background-color: #0056b3;
-} */
 
 .eventUploadForm .checkbox-group {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 30px; */
 }
 
 .eventUploadForm .checkbox-group p {
-    margin-top: 1px;
-    margin-bottom: 30px;
+    /* margin-top: 1px; */
+    margin-bottom: 20px;
     font-weight: 500;
     font-size: 20px;
     color: rgb(15, 15, 15);
@@ -154,25 +173,14 @@
 .eventUploadForm .checkbox-group input:checked + span:after {
     opacity: 1;
 }
-/*team size selection */
 
 .eventUploadForm select {
-    width: 92%;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-.eventUploadForm  p{
-    margin-top: 20px;
-    margin-bottom: 1px;
-    font-size: 15px;
-    /* font-weight: 100; */
-    color: grey;
     width: 100%;
-    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
 }
 
 .eventUploadForm .radio-group {
@@ -191,7 +199,7 @@
 
 .eventUploadForm .radio-group label {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .eventUploadForm .radio-group input[type="radio"] {
@@ -205,7 +213,7 @@
     border-radius: 50%;
     background-color: white;
     margin-right: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -232,4 +240,9 @@
 
 .eventUploadForm .radio-group input[type="radio"]:checked + span:after {
     opacity: 1;
+}
+
+.eventUploadForm .error {
+    color: red;
+    font-size: 14px;
 }

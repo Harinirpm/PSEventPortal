@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './VerifyData.css';
 
 const VerifyData = ({ formData }) => {
   const navigate = useNavigate();
@@ -41,10 +42,11 @@ const VerifyData = ({ formData }) => {
   };
 
   return (
-    <div className="verify-data">
+    <>
       <h2>Verify Your Data</h2>
+    <div className="verify-data">
       {/* Display data for verification */}
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(formData, null, 2)}</pre> */}
       <div className="confirmation-checkbox">
         <input
           type="checkbox"
@@ -59,6 +61,7 @@ const VerifyData = ({ formData }) => {
       <button type="button" onClick={handleBack}>Back</button>
       {isConfirmed && <button type="button" onClick={handleFinalSubmit}>Submit</button>}
     </div>
+    </>
   );
 };
 
