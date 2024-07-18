@@ -13,14 +13,14 @@ const VerifyData = ({ formData }) => {
 
   const handleFinalSubmit = async () => {
     try {
-      console.log('Sending data:', formData); // Log the data being sent
+      console.log('Sending data:', formData); 
 
       const response = await fetch('http://localhost:8081/register/team-details', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Set to JSON
+          'Content-Type': 'application/json', 
         },
-        body: JSON.stringify(formData), // Send as JSON
+        body: JSON.stringify(formData), 
       });
 
       if (!response.ok) {
@@ -30,7 +30,7 @@ const VerifyData = ({ formData }) => {
 
       const result = await response.json();
       console.log('Registration complete:', result);
-      navigate('/'); // Navigate to the desired page after submission
+      navigate('/'); 
     } catch (error) {
       console.error('Error completing registration:', error);
       setError(error.message);
@@ -38,13 +38,14 @@ const VerifyData = ({ formData }) => {
   };
 
   const handleBack = () => {
-    navigate(-1); // Navigate to the previous page
+    navigate(-1); 
   };
 
   return (
     <>
       <h2>Verify Your Data</h2>
     <div className="verify-data">
+      <h2>Verify Your Data</h2>
       {/* Display data for verification */}
       {/* <pre>{JSON.stringify(formData, null, 2)}</pre> */}
       <div className="confirmation-checkbox">

@@ -1,5 +1,6 @@
 import express from 'express';
-import { uploadEventFiles, handleEventUpload, getEvent, getEvents, updateEvent,  getStudentEvents } from '../controllers/eventController.js';
+import { uploadEventFiles, handleEventUpload, getEvent, getEvents, updateEvent,  getStudentEvents ,fetchTeamsForEvent,fetchTeamDetails ,approveTeam, rejectTeam} from '../controllers/eventController.js';
+//import { fetchTeamsForEvent } from '../controllers/registrationController.js';
 // import { getStudentDepartment } from '../controllers/studentController.js';
 
 const router = express.Router();
@@ -14,6 +15,11 @@ router.get('/:id', getEvent);
 // router.get('/department', getEventsByDepartment); 
 router.put('/:id', uploadEventFiles, updateEvent);
 
+
+router.get('/:eventName/teams', fetchTeamsForEvent);
+router.get('/:eventId/teams/:teamName', fetchTeamDetails);
+router.put('/:eventId/teams/:teamName/approve', approveTeam);
+router.put('/:eventId/teams/:teamName/reject', rejectTeam);
 
 
 

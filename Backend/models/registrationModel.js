@@ -42,6 +42,9 @@ export const checkDuplicateEventRegistration = (eventName, teamName, callback) =
             console.error('Error checking duplicate event registration:', err);
             return callback(err);
         }
-        callback(null, results.length > 0); // Returns true if duplicate exists
+        callback(null, results.length > 0); 
     });
 };
+
+
+

@@ -1,10 +1,9 @@
-import { createEventRegistration, createTeamMember, checkDuplicateEventRegistration } from '../models/registrationModel.js';
-import db from '../models/db.js'; // Assuming db.js exports the database connection
+import { createEventRegistration, createTeamMember, checkDuplicateEventRegistration} from '../models/registrationModel.js';
+import db from '../models/db.js'; 
 
 export const createEvent = (req, res) => {
     const { initialData, teamMembers } = req.body;
 
-    // Start a transaction
     db.beginTransaction(err => {
         if (err) return res.status(500).json({ error: 'Database error starting transaction' });
 
@@ -90,3 +89,4 @@ export const createEvent = (req, res) => {
         });
     });
 };
+

@@ -7,17 +7,37 @@ import './EventDetails.css';
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
+  const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     fetchEventDetails();
   }, [id]);
 
+  useEffect(() => {
+    if (event) {
+      fetchTeams();
+    }
+  }, [event]);
+
   const fetchEventDetails = async () => {
     try {
+      //console.log('Fetching event details for event id:', id);
       const response = await axios.get(`http://localhost:8081/events/${id}`);
+      //console.log('Event details fetched:', response.data); 
       setEvent(response.data);
     } catch (error) {
       console.error('Error fetching event details:', error);
+    }
+  };
+
+  const fetchTeams = async () => {
+    try {
+      //console.log('Fetching teams for event name:', event.name); 
+      const response = await axios.get(`http://localhost:8081/events/${event.name}/teams`);
+      console.log('Teams fetched:', response.data); 
+      setTeams(response.data);
+    } catch (error) {
+      console.error('Error fetching teams:', error);
     }
   };
 
@@ -61,10 +81,32 @@ const EventDetails = () => {
       {imageUrl && <h3>Event Image:<br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
 
       <div className="button-1">
-      <Link to={`/update/${id}`}>
-        <button>Update</button>
-      </Link>
+        <Link to={`/update/${id}`}>
+          <button>Update</button>
+        </Link>
       </div>
+      
+      <h2>Registered Teams</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {teams.map((team) => (
+            <tr key={team.teamName}>
+              <td>{team.teamName}</td>
+              <td>
+                <Link to={`/team-details/${team.eventId}/${team.teamName}`}>
+                  <button onClick={() => console.log(`Navigating to team details for team: ${team.teamName}, event id: ${id}`)}>Review</button>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
 </>
   );
