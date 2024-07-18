@@ -25,7 +25,8 @@ const Events = () => {
             <h2>Event Upload</h2>
             <br></br>
             <Link to="/upload">
-                <button className='navigate-button'>Create Event<CiCirclePlus className="circle-icon"/></button>
+                <button className='navigate-button'>+  Create Event</button>
+                {/* <CiCirclePlus className="circle-icon"/> */}
             </Link>
             <div className="event-cards">
                 {events.map(event => (

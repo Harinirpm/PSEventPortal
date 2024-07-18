@@ -45,7 +45,7 @@ const VerifyData = ({ formData }) => {
     <>
       <h2>Verify Your Data</h2>
     <div className="verify-data">
-      <h2>Verify Your Data</h2>
+      {/* <h2>Verify Your Data</h2> */}
       {/* Display data for verification */}
       {/* <pre>{JSON.stringify(formData, null, 2)}</pre> */}
       <div className="confirmation-checkbox">

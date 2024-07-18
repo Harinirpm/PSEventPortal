@@ -32,7 +32,7 @@ const EventDetails = () => {
 
   const fetchTeams = async () => {
     try {
-      //console.log('Fetching teams for event name:', event.name); 
+      console.log('Fetching teams for event name:', event.name); 
       const response = await axios.get(`http://localhost:8081/events/${event.name}/teams`);
       console.log('Teams fetched:', response.data); 
       setTeams(response.data);
@@ -68,17 +68,17 @@ const EventDetails = () => {
         </Link>
         <h1>{event.name}</h1>
       </div>
-      <h3>Description:</h3><p>{event.description}</p>
-      <h3>Event Start Date: </h3><p>{formatDate(event.eventStartDate)}</p>
-      <h3>Event End Date:</h3> <p>{formatDate(event.eventEndDate)}</p>
-      <h3>Registration Start Date:</h3><p>{formatDate(event.registrationStartDate)}</p>
-      <h3>Registration End Date:</h3><p> {formatDate(event.registrationEndDate)}</p>
-      <h3 >Departments: </h3><p>{departments}</p>
-      <h3>Team Size:</h3> <p>{event.teamSize}</p>
-      <h3>Event Mode: </h3><p>{event.eventMode}</p>
-      <h3>Event Link:<br></br><br></br><a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></h3>
-      {noticeUrl && <h3>Event Notice:<br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
-      {imageUrl && <h3>Event Image:<br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
+      <h3><strong>Description:</strong></h3><p>{event.description}</p>
+      <h3><strong>Event Start Date: </strong></h3><p>{formatDate(event.eventStartDate)}</p>
+      <h3><strong>Event End Date:</strong></h3> <p>{formatDate(event.eventEndDate)}</p>
+      <h3><strong>Registration Start Date:</strong></h3><p>{formatDate(event.registrationStartDate)}</p>
+      <h3><strong>Registration End Date:</strong></h3><p> {formatDate(event.registrationEndDate)}</p>
+      <h3 ><strong>Departments: </strong></h3><p>{departments}</p>
+      <h3><strong>Team Size:</strong></h3> <p>{event.teamSize}</p>
+      <h3><strong>Event Mode: </strong></h3><p>{event.eventMode}</p>
+      <h3><strong>Event Link:</strong><br></br><br></br><a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></h3>
+      {noticeUrl && <h3><strong>Event Notice:</strong><br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
+      {imageUrl && <h3><strong>Event Image:</strong><br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
 
       <div className="button-1">
         <Link to={`/update/${id}`}>

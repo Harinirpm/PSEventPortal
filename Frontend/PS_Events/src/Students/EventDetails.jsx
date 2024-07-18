@@ -48,7 +48,7 @@ const EventDetails = () => {
     <div className="event-details">
       <div className="title">
         <Link to="/">
-          <FaArrowCircleLeft size={18} color="black" aria-label="Back to events" />
+          <FaArrowCircleLeft size={28} color="black" aria-label="Back to events" />
         </Link>
         <h1>{event.name}</h1>
       </div>

@@ -57,6 +57,7 @@ const TeamDetails = () => {
   const teamLeader = team.members.find(member => member.isTeamLeader);
 
   return (
+    <>
     <div className="team-details">
       <div className="title">
         <Link to={`/events`}>
@@ -109,6 +110,7 @@ const TeamDetails = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
