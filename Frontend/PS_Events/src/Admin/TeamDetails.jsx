@@ -8,7 +8,9 @@ const TeamDetails = () => {
   const { eventId, teamName } = useParams();
   const [team, setTeam] = useState(null);
   const [rejectionReason, setRejectionReason] = useState("");
-  const [showRejectionPopup, setShowRejectionPopup] = useState(false);
+  const [showApprovalPopup, setShowApprovalPopup] = useState(false);
+  const [showRejectionPopup, setShowRejectionPopup] = useState(false); // Added state for rejection popup
+  const [rewardPoints, setRewardPoints] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,18 +26,43 @@ const TeamDetails = () => {
     }
   };
 
-  const handleApprove = async () => {
-    try {
-      await axios.put(`http://localhost:8081/events/${eventId}/teams/${teamName}/approve`);
-      alert('Team approved successfully!');
-      navigate(`/events/${eventId}`);
-    } catch (error) {
-      console.error('Error approving team:', error);
-    }
+  const handleApprove = () => {
+    setShowApprovalPopup(true);
   };
 
   const handleReject = () => {
-    setShowRejectionPopup(true);
+    setShowRejectionPopup(true); // Show rejection popup
+  };
+
+  const handleRewardChange = (name, points) => {
+    setRewardPoints(prevPoints => ({ ...prevPoints, [name]: points }));
+  };
+
+  const handleApprovalSubmit = async () => {
+    try {
+      await axios.put(`http://localhost:8081/events/${eventId}/teams/${teamName}/approve`);
+
+      // Filter out invalid entries
+      const validRewardsData = Object.entries(rewardPoints)
+        .filter(([name, points]) => name && points)
+        .map(([name, points]) => ({
+          name,
+          teamName,
+          eventId,
+          level1: points,
+        }));
+
+      console.log(validRewardsData);
+
+      await axios.post('http://localhost:8081/events/rewards', { rewards: validRewardsData });
+
+      alert('Team approved successfully!');
+      navigate(`/details/${eventId}`);
+    } catch (error) {
+      console.error('Error approving team:', error);
+    } finally {
+      setShowApprovalPopup(false);
+    }
   };
 
   const handleRejectionSubmit = async () => {
@@ -46,7 +73,7 @@ const TeamDetails = () => {
     } catch (error) {
       console.error('Error rejecting team:', error);
     } finally {
-      setShowRejectionPopup(false);
+      setShowRejectionPopup(false); // Hide rejection popup
     }
   };
 
@@ -54,13 +81,13 @@ const TeamDetails = () => {
     return <div>Loading...</div>;
   }
 
-  const teamLeader = team.members.find(member => member.isTeamLeader);
+  const teamLeader = team.members?.find(member => member.isTeamLeader);
 
   return (
     <>
     <div className="team-details">
       <div className="title">
-        <Link to={`/events`}>
+        <Link to={`/details/${eventId}`}>
           <FaArrowCircleLeft size={18} color="black" />
         </Link>
         <h1>Team: {team.teamName}</h1>
@@ -84,7 +111,7 @@ const TeamDetails = () => {
       )}
       <h2>Team Members</h2>
       <ul>
-        {team.members.filter(member => !member.isTeamLeader).map((member, index) => (
+        {team.members?.filter(member => !member.isTeamLeader).map((member, index) => (
           <li key={index}>
             <p>Name: {member.name}</p>
             <p>Email: {member.email}</p>
@@ -97,14 +124,46 @@ const TeamDetails = () => {
       <button onClick={handleApprove}>Approve</button>
       <button onClick={handleReject}>Reject</button>
 
+      {showApprovalPopup && (
+        <div className="approval-popup">
+          <h3>Assign Reward Points</h3>
+          <div>
+            <h4>Team Leader</h4>
+            {teamLeader && (
+              <div>
+                <p>Name: {teamLeader.name}</p>
+                <input
+                  type="number"
+                  placeholder="Reward Points"
+                  onChange={(e) => handleRewardChange(teamLeader.name, e.target.value)}
+                />
+              </div>
+            )}
+            <h4>Team Members</h4>
+            {team.members?.filter(member => !member.isTeamLeader).map((member, index) => (
+              <div key={index}>
+                <p>Name: {member.name}</p>
+                <input
+                  type="number"
+                  placeholder="Reward Points"
+                  onChange={(e) => handleRewardChange(member.name, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+          <button onClick={handleApprovalSubmit}>Submit</button>
+          <button onClick={() => setShowApprovalPopup(false)}>Cancel</button>
+        </div>
+      )}
+
       {showRejectionPopup && (
         <div className="rejection-popup">
-          <h3>Reason for Rejection</h3>
+          <h3>Rejection Reason</h3>
           <textarea
             value={rejectionReason}
             onChange={(e) => setRejectionReason(e.target.value)}
-            placeholder="Enter reason for rejection"
-          ></textarea>
+            placeholder="Enter the reason for rejection"
+          />
           <button onClick={handleRejectionSubmit}>Submit</button>
           <button onClick={() => setShowRejectionPopup(false)}>Cancel</button>
         </div>
