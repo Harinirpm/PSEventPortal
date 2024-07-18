@@ -1,4 +1,4 @@
-import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel, getTeamsForEvent, getTeamDetails,approveTeamInModel, rejectTeamInModel  } from '../models/eventModel.js';
+import { createEvent, getAllEvents, getEventById, updateEventById, getEventsByDepartmentFromModel, getTeamsForEvent, getTeamDetails,approveTeamInModel, rejectTeamInModel, getMemberId,storeReward } from '../models/eventModel.js';
 import { getStudentByEmail } from '../models/studentModel.js';
 import multer from 'multer';
 import path from 'path';
@@ -166,4 +166,36 @@ export const approveTeam = (req, res) => {
       if (err) return res.status(500).json({ error: 'Internal server error' });
       res.json({ message: 'Team rejected successfully' });
     });
+  };
+
+  export const storeRewards = async (req, res) => {
+    const rewards = req.body.rewards;
+  
+    try {
+      const rewardsWithIds = await Promise.all(rewards.map(async reward => {
+        return new Promise((resolve, reject) => {
+          getMemberId(reward.name, reward.eventId, (error, memberId) => {
+            if (error) {
+              return reject(error);
+            }
+            resolve({
+              memberId,
+              eventId: reward.eventId,
+              level1: reward.level1
+            });
+          });
+        });
+      }));
+  
+      storeReward(rewardsWithIds, (error, results) => {
+        if (error) {
+          console.error('Error storing rewards:', error);
+          return res.status(500).send('Error storing rewards');
+        }
+        res.status(200).send('Rewards stored successfully');
+      });
+    } catch (error) {
+      console.error('Error fetching member IDs:', error);
+      res.status(500).send('Error fetching member IDs');
+    }
   };

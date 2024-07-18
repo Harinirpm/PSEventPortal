@@ -34,7 +34,7 @@ const EventDetails = () => {
     try {
       //console.log('Fetching teams for event name:', event.name); 
       const response = await axios.get(`http://localhost:8081/events/${event.name}/teams`);
-      console.log('Teams fetched:', response.data); 
+      //console.log('Teams fetched:', response.data); 
       setTeams(response.data);
     } catch (error) {
       console.error('Error fetching teams:', error);

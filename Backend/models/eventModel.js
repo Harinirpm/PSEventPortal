@@ -127,3 +127,25 @@ export const rejectTeamInModel = (eventId, teamName, rejectionReason, callback) 
   const sql = 'UPDATE event_registration SET rejected = ? WHERE eventId = ? AND teamName = ?';
   db.query(sql, [rejectionReason, eventId, teamName], callback);
 };
+
+export const getMemberId = (name, eventId, callback) => {
+  const query = `SELECT memberId FROM team_members WHERE name = ? AND eventId = ?`;
+  db.query(query, [name, eventId], (error, results) => {
+    if (error) {
+      return callback(error);
+    }
+    if (results.length === 0) {
+      return callback(new Error('Member not found'));
+    }
+    callback(null, results[0].memberId);
+  });
+};
+
+export const storeReward = (rewards, callback) => {
+  const query = `INSERT INTO rewards_summary (memberId, eventId, level1) VALUES ?`;
+  const values = rewards.map(reward => [reward.memberId, reward.eventId, reward.level1]);
+
+  db.query(query, [values], (error, results) => {
+    callback(error, results);
+  });
+};
