@@ -1,26 +1,218 @@
-.rejection-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  
-  .rejection-popup h3 {
-    margin-top: 0;
-  }
-  
-  .rejection-popup textarea {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.team-detailss {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100px;
-    margin: 10px 0;
-  }
-  
-  .rejection-popup button {
+    max-width: 900px;
+    padding: 50px;
+    border-radius: 10px;
+    border: 1px solid rgb(182, 182, 182);
+    margin-left: 1%;
+    margin-top: 2%;
+    max-width: 1000px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.team-detailss h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: rgb(14, 14, 14);
+}
+
+.team-detailss .button {
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 500;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  margin-right: 10px; /* Adds space between buttons */
+}
+.team-detailss .button-r {
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 500;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #ff0000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  margin-right: 10px; /* Adds space between buttons */
+}
+
+
+.team-detailss .button:hover {
+  background-color: #0056b3;
+}
+.team-detailss .button-1 {
+    margin-left: auto; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(14, 120, 220);;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+.team-detailss .button-c{
+ 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #686868;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-right: 10px; /* Adds space between buttons */
+}
+
+/* .team-detailss .button-1:hover {
+    background-color: #0056b3;
+} */
+
+.team-detailss .title {
+    display: flex;
     margin-right: 10px;
-  }
+    gap: 10px; 
+    margin-bottom: 2%;
+    color: rgb(6, 102, 158);
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
+    flex-direction: row;
+    /* margin-top: 10px; */
+
+}
+
+.team-detailss .title a {
+    display: flex;
+    align-items: center; 
+    text-decoration: none; 
+    margin-left: 10px;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
+}
+
+.team-detailss .title h1 {
+    margin: 0; 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin-top: 30px;
+}
+.team-detailss .back-link {
+  display: flex;
+  align-items: flex-end; /* Align the icon to the bottom within the link */
+  margin-top: 30px;
+}
+
+.team-detailss p {
+    margin: 0; 
+    font-family: 'Roboto', sans-serif;
+    color: gray;
+}
+
+.team-detailss h2.team-name {
+    color: red; /* Or any color you want for the team name */
+}
+.team-detailss .detail-item h3 {
+  margin-right: 10px; /* Space between label and value */
+}
+.team-detailss .detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px; /* Space between items */
+  text-decoration: none;
+ 
+}
+
+
+.team-detailss .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  z-index: 999; /* Ensure it is behind the popup but above other content */
+}
+.team-detailss .rejection-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 390px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  /* border: 1px solid rgb(0, 0, 0); */
+  z-index: 1000;
+  margin-left: 8%;
   
+}
+
+.team-detailss .rejection-popup h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.team-detailss .rejection-popup textarea {
+  width: 95%;
+  height: 150px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  resize: none;
+  
+}
+
+.team-detailss .rejection-popup button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.team-detailss .rejection-popup button:first-of-type {
+  background-color: rgb(14, 120, 220);;
+  color: white;
+}
+
+.team-detailss .rejection-popup button:last-of-type {
+  background-color: hsl(0, 100%, 50%);
+  color: white;
+  margin-left: 50%;
+}
+
+.team-detailss .rejection-popup button:hover {
+  /* opacity: 0.8; */
+  background-color: #ff0000;
+  color: #fff;
+}

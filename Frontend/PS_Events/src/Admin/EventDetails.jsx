@@ -63,7 +63,7 @@ const EventDetails = () => {
     <h1>Event Details</h1>
     <div className="event-details">
       <div className="title">
-        <Link to={`/events`}>
+        <Link to={`/eventstatus/${event.id}`}>
           <FaArrowCircleLeft size={28} color="black"/>
         </Link>
         <h1>{event.name}</h1>
@@ -81,12 +81,12 @@ const EventDetails = () => {
       {imageUrl && <h3><strong>Event Image:</strong><br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
 
       <div className="button-1">
-        <Link to={`/update/${id}`}>
+        <Link to={`/eventupdate/${id}`}>
           <button>Update</button>
         </Link>
       </div>
       
-      <h2>Registered Teams</h2>
+      {/* <h2>Registered Teams</h2>
       <table>
         <thead>
           <tr>
@@ -106,7 +106,7 @@ const EventDetails = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
 </>
   );

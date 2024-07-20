@@ -1,0 +1,70 @@
+/* RegistrationStatus.css */
+.registration-status {
+    margin: 20px auto;
+    padding: 20px ;
+    width: 100%;
+    max-width: 1100px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .registration-status h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .registration-status table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1px;
+    border: 1px solid rgb(209, 209, 209);
+  }
+  
+  .registration-status th,
+  .registration-status td {
+    padding: 19px 30px;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .registration-status th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .registration-status tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .registration-status .reason {
+        color: red;
+       
+        text-align: center;
+  }
+  /* .registration-status .reason span {
+    color: red;
+    border: 1px solid red;
+    padding: 2px 4px;
+    display: inline-block;
+  }
+   */
+  
+  .registration-status .action button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .registration-status .action button:hover {
+    background-color: #007bff;
+  }
+  

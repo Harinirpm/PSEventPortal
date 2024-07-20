@@ -8,13 +8,15 @@ import Events from './Admin/Events';
 import Horinav from './Components/Horinav';
 import Sidenav from './Components/Sidenav';
 import EventUploadForm from './Admin/EventUploadForm';
-import EventDetails1 from './Admin/EventDetails';
+import AdminEventDetails from './Admin/EventDetails';
 import EventUpdateForm from './Admin/EventUpdateForm';
-import EventDetails2 from './Students/EventDetails';
+import StudentEventDetails from './Students/StudentEventDetails';
 import EventRegister from './Students/EventRegister';
 import TeamMemberDetails from './Students/TeamMemberDetails';
 import VerifyData from './Students/VerifyData';
 import TeamDetails from './Admin/TeamDetails';
+import EventStatus from './Admin/EventStatus';
+import RegistrationStatus from './Students/RegistrationStatus';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -82,14 +84,16 @@ function App() {
           <Route path='/home' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path="/upload" element={<EventUploadForm />} />
-          <Route path="/details/:id" element={<EventDetails1 />} />
-          <Route path="/update/:id" element={<EventUpdateForm />} />
-          <Route path="/events/:id" element={<EventDetails2 />} />
+          <Route path="/eventdetails/:id" element={<AdminEventDetails />} />
+          <Route path="/eventupdate/:id" element={<EventUpdateForm />} />
+          <Route path="/eventstatus/:id" element={<EventStatus />} />
+          <Route path="/events/:id" element={<StudentEventDetails />} />
           <Route path="/eventregister/:eventName" element={<EventRegister formData={formData} setFormData={setFormData} />} />
-        <Route path="/team-members/:memberIndex" element={<TeamMemberDetails formData={formData} setFormData={setFormData} />} />
-        <Route path="/verify" element={<VerifyData formData={formData} />} />
-        <Route path="/team-details/:eventId/:teamName" element={<TeamDetails />} />
-        </Routes>
+          <Route path="/team-members/:memberIndex" element={<TeamMemberDetails formData={formData} setFormData={setFormData} />} />
+          <Route path="/verify" element={<VerifyData formData={formData} />} />
+          <Route path="/:eventid/team-details/:eventId/:teamName" element={<TeamDetails />} />
+          <Route path="/registrationstatus" element={<RegistrationStatus/>}/>
+          </Routes>
       </div>
     </div>
   );

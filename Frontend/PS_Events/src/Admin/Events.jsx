@@ -14,6 +14,7 @@ const Events = () => {
     const fetchEvents = async () => {
         try {
             const response = await axios.get('http://localhost:8081/events');
+            console.log(response.data)
             setEvents(response.data);
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -31,7 +32,7 @@ const Events = () => {
             <div className="event-cards">
                 {events.map(event => (
                     <div key={event.id} className="event-card">
-                        <Link to={`/details/${event.id}`}>
+                        <Link to={`/eventstatus/${event.id}`}>
                             {event.eventImage && (
                                 <img
                                     src={`http://localhost:8081/${event.eventImage.replace(/\\/g, '/')}`}

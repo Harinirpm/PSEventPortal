@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
 
 const departments = [
-   'Agriculture Engineering','Artificial Intelligence and Data Science', 'Artificial Intelligence and Machine Learning',
+    'Agriculture Engineering','Artificial Intelligence and Data Science', 'Artificial Intelligence and Machine Learning',
     'Information Technology','Computer Science and Engineering','Computer Technology','Computer Science and Business System',
     'Computer Science and Design',
     'Information Science Engineering','Electrical and Electronics Engineering','Electronics and Communication Engineering', 'Mechanical Engineering', 
@@ -29,7 +29,7 @@ function EventUploadForm() {
     const [eventMode, setEventMode] = useState("");
     const [eventImage, setEventImage] = useState(null);
     const [imageError, setImageError] = useState("");
-   
+    const [errors, setErrors] = useState({});
 
     const handleCheckboxChange = (department) => {
         setSelectedDepartments(prevState => 
@@ -39,10 +39,34 @@ function EventUploadForm() {
         );
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!name) newErrors.name = "Event Name is required";
+        if (!description) newErrors.description = "Event Description is required";
+        if (!eventStartDate) newErrors.eventStartDate = "Event Start Date is required";
+        if (!eventEndDate) newErrors.eventEndDate = "Event End Date is required";
+        if (!registrationStartDate) newErrors.registrationStartDate = "Registration Start Date is required";
+        if (!registrationEndDate) newErrors.registrationEndDate = "Registration End Date is required";
+        if (eventStartDate && eventEndDate && eventStartDate >= eventEndDate) newErrors.eventEndDate = "Event End Date must be after Start Date";
+        if (registrationStartDate && registrationEndDate && registrationStartDate >= registrationEndDate) newErrors.registrationEndDate = "Registration End Date must be after Start Date";
+        if (selectedDepartments.length === 0) newErrors.selectedDepartments = "At least one department must be selected";
+        if (!teamSize) newErrors.teamSize = "Team Size is required";
+        if (!eventLink) newErrors.eventLink = "Event Link is required";
+        if (!eventMode) newErrors.eventMode = "Event Mode is required";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
+        
         const eventData = new FormData();
         eventData.append('name', name);
         eventData.append('description', description);
@@ -62,7 +86,7 @@ function EventUploadForm() {
         }
 
         console.log('Event Data:', eventData);
-        axios.post('http://localhost:8081/events/upload', eventData,{
+        axios.post('http://localhost:8081/events/upload', eventData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -83,7 +107,7 @@ function EventUploadForm() {
                 setEventMode("");
                 setEventImage(null);
 
-                navigate('/events')
+                navigate('/events');
             })
             .catch(error => {
                 if (error.response) {
@@ -111,168 +135,186 @@ function EventUploadForm() {
     return (
         <>
             <h1>Upload Event Details</h1>
-        <div className='eventUploadForm'>
-            <form className='uploadform' onSubmit={handleSubmit}>
-                <label>
-                    <p>Event Name:</p>
-                    <input
-                        className='box'
-                        type='text'
-                        placeholder='Enter Event Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <p>Event Description:</p>
-                    <textarea
-                        className='para'
-                        placeholder='Enter Event Description with Address.'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </label>
-                <div className='event-dates'>
-                <label>
-                    <p>Event Start Date:</p>
-                    <DatePicker
-                        className='box'
-                        selected={eventStartDate}
-                        onChange={date => setEventStartDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        showMonthDropdown
-                        showYearDropdown
-                        dropdownMode="select"
-                        placeholderText="MM/DD/YYYY"
-                    />
-                </label>
-                <label>
-                    <p>Event End Date:</p>
-                    <DatePicker
-                        className='box'
-                        selected={eventEndDate}
-                        onChange={date => setEventEndDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        showMonthDropdown
-                        showYearDropdown
-                        dropdownMode="select"
-                        placeholderText="MM/DD/YYYY"
-                    />
-                </label>
-                </div>
-                <div className='register-dates'>
-                <label>
-                    <p>Registration Start Date:</p>
-                    <DatePicker
-                        className='box'
-                        selected={registrationStartDate}
-                        onChange={date => setRegistrationStartDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        showMonthDropdown
-                        showYearDropdown
-                        dropdownMode="select"
-                        placeholderText="MM/DD/YYYY"
-                    />
-                </label>
-                <label>
-                    <p>Registration End Date:</p>
-                    <DatePicker
-                        className='box'
-                        selected={registrationEndDate}
-                        onChange={date => setRegistrationEndDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        showMonthDropdown
-                        showYearDropdown
-                        dropdownMode="select"
-                        placeholderText="MM/DD/YYYY"
-                    />
-                </label>
-                </div>
-                <label >
-                    <p>Team Size:</p>
-                    <select
-                        value={teamSize}
-                        onChange={(e) => setTeamSize(e.target.value)}
-                        className={teamSize === '' ? 'gray-text' : ''}
-                    >
-                        <option value="" disabled hidden>Select Team Size</option>
-                        <option value="1" >1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </label>
-                <label>
-                    <p>Event Notice:</p>
-                    <input
-                        className='box'
-                        type='file'
-                        onChange={(e) => setEventNotice(e.target.files[0])}
-                    />
-                </label>
-                <label>
-                    <p>Event Image:</p>
-                    <input
-                        className='box'
-                        type='file'
-                        accept=".jpg, .jpeg, .png"
-                        onChange={handleImageChange}  
-                    />
-                    {imageError && <p className="error" style={{color: "red"}}>{imageError}</p>}
-                </label>
-                <label>
-                    <p>Event Website Link:</p>
-                    <input
-                        className='box'
-                        type='text'
-                        placeholder='Enter Event Link'
-                        value={eventLink}
-                        onChange={(e) => setEventLink(e.target.value)}
-                    />
-                </label>
-                <div className='radio-group'>
-                    <p>Select Event Mode:</p>
+            <div className='eventUploadForm'>
+                <form className='uploadform' onSubmit={handleSubmit}>
                     <label>
+                        <p>Event Name:</p>
                         <input
-                            type='radio'
-                            value='online'
-                            checked={eventMode === 'online'}
-                            onChange={() => setEventMode('online')}
-                        /><span></span>
-                        Online
+                            className='box'
+                            type='text'
+                            placeholder='Enter Event Name'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                        {errors.name && <p className="error" style={{color: "red"}}>{errors.name}</p>}
                     </label>
                     <label>
-                        <input
-                            type='radio'
-                            value='offline'
-                            checked={eventMode === 'offline'}
-                            onChange={() => setEventMode('offline')}
-                        /><span></span>
-                        Offline
+                        <p>Event Description:</p>
+                        <textarea
+                            className='para'
+                            placeholder='Enter Event Description with Address.'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                        />
+                        {errors.description && <p className="error" style={{color: "red"}}>{errors.description}</p>}
                     </label>
-                </div>
-                
-                <div className='checkbox-group'>
-                    <p>Select Departments:</p>
-                    {departments.map((department, index) => (
-                        <label key={index}>
-                            <input
-                                className='checkbox1'
-                                type='checkbox'
-                                checked={selectedDepartments.includes(department)}
-                                onChange={() => handleCheckboxChange(department)}
-                            /> <span></span>
-                            {department}
+                    <div className='event-dates'>
+                        <label>
+                            <p>Event Start Date:</p>
+                            <DatePicker
+                                className='box'
+                                selected={eventStartDate}
+                                onChange={date => setEventStartDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                                required
+                            />
+                            {errors.eventStartDate && <p className="error" style={{color: "red"}}>{errors.eventStartDate}</p>}
                         </label>
-                    ))}
-                </div>
-                
-                <button type='submit'>Submit</button>
-            </form>
-        </div>
+                        <label>
+                            <p>Event End Date:</p>
+                            <DatePicker
+                                className='box'
+                                selected={eventEndDate}
+                                onChange={date => setEventEndDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                                required
+                            />
+                            {errors.eventEndDate && <p className="error" style={{color: "red"}}>{errors.eventEndDate}</p>}
+                        </label>
+                    </div>
+                    <div className='register-dates'>
+                        <label>
+                            <p>Registration Start Date:</p>
+                            <DatePicker
+                                className='box'
+                                selected={registrationStartDate}
+                                onChange={date => setRegistrationStartDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                                required
+                            />
+                            {errors.registrationStartDate && <p className="error" style={{color: "red"}}>{errors.registrationStartDate}</p>}
+                        </label>
+                        <label>
+                            <p>Registration End Date:</p>
+                            <DatePicker
+                                className='box'
+                                selected={registrationEndDate}
+                                onChange={date => setRegistrationEndDate(date)}
+                                dateFormat="yyyy-MM-dd"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                                required
+                            />
+                            {errors.registrationEndDate && <p className="error" style={{color: "red"}}>{errors.registrationEndDate}</p>}
+                        </label>
+                    </div>
+                    <label>
+                        <p>Team Size:</p>
+                        <select
+                            value={teamSize}
+                            onChange={(e) => setTeamSize(e.target.value)}
+                            className={teamSize === '' ? 'gray-text' : ''}
+                            required
+                        >
+                            <option value="" disabled hidden>Select Team Size</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        {errors.teamSize && <p className="error" style={{color: "red"}}>{errors.teamSize}</p>}
+                    </label>
+                    <label>
+                        <p>Event Notice:</p>
+                        <input
+                            className='box'
+                            type='file'
+                            onChange={(e) => setEventNotice(e.target.files[0])}
+                            required
+                        />
+                    </label>
+                    <label>
+                        <p>Event Image:</p>
+                        <input
+                            className='box'
+                            type='file'
+                            accept=".jpg, .jpeg, .png"
+                            onChange={handleImageChange}
+                            required
+                        />
+                        {imageError && <p className="error" style={{color: "red"}}>{imageError}</p>}
+                    </label>
+                    <label>
+                        <p>Event Website Link:</p>
+                        <input
+                            className='box'
+                            type='text'
+                            placeholder='Enter Event Link'
+                            value={eventLink}
+                            onChange={(e) => setEventLink(e.target.value)}
+                            required
+                        />
+                        {errors.eventLink && <p className="error" style={{color: "red"}}>{errors.eventLink}</p>}
+                    </label>
+                    <div className='radio-group'>
+                        <p>Select Event Mode:</p>
+                        <label>
+                            <input
+                                type='radio'
+                                value='online'
+                                checked={eventMode === 'online'}
+                                onChange={() => setEventMode('online')}
+                            /><span></span>
+                            Online
+                        </label>
+                        <label>
+                            <input
+                                type='radio'
+                                value='offline'
+                                checked={eventMode === 'offline'}
+                                onChange={() => setEventMode('offline')}
+                            /><span></span>
+                            Offline
+                        </label>
+                        {errors.eventMode && <p className="error" style={{color: "red"}}>{errors.eventMode}</p>}
+                    </div>
+                    <div className='checkbox-group'>
+                        <p>Select Departments:</p>
+                        {departments.map((department, index) => (
+                            <label key={index}>
+                                <input
+                                    className='checkbox1'
+                                    type='checkbox'
+                                    checked={selectedDepartments.includes(department)}
+                                    onChange={() => handleCheckboxChange(department)}
+                                /> <span></span>
+                                {department}
+                            </label>
+                        ))}
+                        {errors.selectedDepartments && <p className="error" style={{color: "red"}}>{errors.selectedDepartments}</p>}
+                    </div>
+                    <button type='submit'>Submit</button>
+                </form>
+            </div>
         </>
     );
 }
 
-export default EventUploadForm
+export default EventUploadForm;

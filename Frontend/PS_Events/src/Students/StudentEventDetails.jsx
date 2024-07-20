@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import { FaArrowCircleLeft } from "react-icons/fa";
+import './StudentEventDetails.css';
 
 
 const EventDetails = () => {
@@ -45,7 +46,7 @@ const EventDetails = () => {
   const noticeUrl = event.eventNotice ? `http://localhost:8081/${event.eventNotice.replace(/\\/g, '/')}` : null;
 
   return (
-    <div className="event-details">
+    <div className="student-event-details">
       <div className="title">
         <Link to="/">
           <FaArrowCircleLeft size={28} color="black" aria-label="Back to events" />

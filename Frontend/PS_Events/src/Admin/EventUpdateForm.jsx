@@ -111,7 +111,7 @@ const EventUpdateForm = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            navigate(`/details/${id}`);
+            navigate(`/eventdetails/${id}`);
         } catch (error) {
             console.error('Error updating event:', error);
         }
