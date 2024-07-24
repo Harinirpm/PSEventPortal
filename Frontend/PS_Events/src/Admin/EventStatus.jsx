@@ -5,9 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
 import { FaPen } from "react-icons/fa6";
 import EventUpdateForm from "./EventUpdateForm";
+import { FaArrowCircleLeft } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
 // import TeamDetails from './TeamDetails';
-import RegistrationData from './RegistrationData'
+import EventRegistrationData from './EventRegistrationData'
 
 const EventStatus= () => {
     const [events, setEvents] = useState([]);
@@ -29,11 +30,16 @@ const EventStatus= () => {
   return (
     <>
     <div className='event'>
+    <div className="title">
+    <Link to={`/events`} className="back-link">
+          <FaArrowCircleLeft size={28} color="black" />
+        </Link>
     <h1>Event Status</h1>
+    </div>
     <div className='event-status-container'>
         <div className='team-details'>
     {/* <TeamDetails></TeamDetails> */}
-    <RegistrationData name={events.name} eventid={id}/>
+    <EventRegistrationData name={events.name} eventid={id}/>
     </div>
     <div className="EventStatus">
         <div className="event-cards">

@@ -13,11 +13,11 @@ const EventDetails = () => {
     fetchEventDetails();
   }, [id]);
 
-  useEffect(() => {
-    if (event) {
-      fetchTeams();
-    }
-  }, [event]);
+  // useEffect(() => {
+  //   if (event) {
+  //     fetchTeams();
+  //   }
+  // }, [event]);
 
   const fetchEventDetails = async () => {
     try {
@@ -30,16 +30,16 @@ const EventDetails = () => {
     }
   };
 
-  const fetchTeams = async () => {
-    try {
-      console.log('Fetching teams for event name:', event.name); 
-      const response = await axios.get(`http://localhost:8081/events/${event.name}/teams`);
-      //console.log('Teams fetched:', response.data); 
-      setTeams(response.data);
-    } catch (error) {
-      console.error('Error fetching teams:', error);
-    }
-  };
+  // const fetchTeams = async () => {
+  //   try {
+  //     console.log('Fetching teams for event name:', event.name); 
+  //     const response = await axios.get(`http://localhost:8081/events/${event.name}/teams`);
+  //     //console.log('Teams fetched:', response.data); 
+  //     setTeams(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching teams:', error);
+  //   }
+  // };
 
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
@@ -60,12 +60,15 @@ const EventDetails = () => {
 
   return (
     <>
-    <h1>Event Details</h1>
-    <div className="event-details">
-      <div className="title">
-        <Link to={`/eventstatus/${event.id}`}>
+     <div className="title">
+     <Link to={`/eventstatus/${event.id}`}>
           <FaArrowCircleLeft size={28} color="black"/>
         </Link>
+    <h1>Event Details</h1>
+    </div>
+    <div className="event-details">
+      <div className="title">
+       
         <h1>{event.name}</h1>
       </div>
       <h3><strong>Description:</strong></h3><p>{event.description}</p>
@@ -75,11 +78,27 @@ const EventDetails = () => {
       <h3><strong>Registration End Date:</strong></h3><p> {formatDate(event.registrationEndDate)}</p>
       <h3 ><strong>Departments: </strong></h3><p>{departments}</p>
       <h3><strong>Team Size:</strong></h3> <p>{event.teamSize}</p>
+      <h3><strong>Eligible Years: </strong></h3><p>{event.eligibleYears}</p>
       <h3><strong>Event Mode: </strong></h3><p>{event.eventMode}</p>
       <h3><strong>Event Link:</strong><br></br><br></br><a href={event.eventLink} target="_blank" rel="noopener noreferrer">{event.eventLink}</a></h3>
-      {noticeUrl && <h3><strong>Event Notice:</strong><br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Download</a></h3>}
+      {noticeUrl && <h3><strong>Event Notice:</strong><br></br><br></br><a href={noticeUrl} target="_blank" rel="noopener noreferrer">Open</a></h3>}
       {imageUrl && <h3><strong>Event Image:</strong><br></br><br></br><img src={imageUrl} alt={event.name} className="event-image" /></h3>}
 
+      <h3><strong>Criteria:</strong></h3>
+        <div>
+          <h4>Year 1:</h4>
+          <p>Course: {event.year1course || '--'}</p>
+          <p>Level: {event.year1level || '--'}</p>
+          <h4>Year 2:</h4>
+          <p>Course: {event.year2course || '--'}</p>
+          <p>Level: {event.year2level || '--'}</p>
+          <h4>Year 3:</h4>
+          <p>Course: {event.year3course || '--'}</p>
+          <p>Level: {event.year3level || '--'}</p>
+          <h4>Year 4:</h4>
+          <p>Course: {event.year4course || '--'}</p>
+          <p>Level: {event.year4level || '--'}</p>
+        </div>
       <div className="button-1">
         <Link to={`/eventupdate/${id}`}>
           <button>Update</button>

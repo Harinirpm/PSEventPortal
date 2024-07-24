@@ -84,14 +84,14 @@
     box-sizing: border-box;
     overflow-wrap: break-word;
     resize: vertical;
-    border: 1px solid rgb(173, 172, 172);
+    border: 1px solid rgb(206, 206, 206);
     font-family: 'Roboto', sans-serif;
 }
 
 .eventUploadForm label {
     /* margin-bottom: 10px; */
     /* margin-top: 10px; */
-    color: grey;
+    color: rgb(66, 66, 66);
     display: flex;
     flex-direction: column;
     font-size: 13px;
@@ -112,7 +112,8 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.eventUploadForm .checkbox-group {
+.eventUploadForm .checkbox-group ,
+.eventUploadForm .eligible-year-group{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -120,7 +121,8 @@
     /* margin-bottom: 30px; */
 }
 
-.eventUploadForm .checkbox-group p {
+.eventUploadForm .checkbox-group p,
+.eventUploadForm .eligible-year-group p {
     /* margin-top: 1px; */
     margin-bottom: 20px;
     font-weight: 500;
@@ -130,16 +132,19 @@
     width: 100%;
 }
 
-.eventUploadForm .checkbox-group label {
+.eventUploadForm .checkbox-group label ,
+.eventUploadForm .eligible-year-group label{
     display: block; 
     margin-bottom: 10px;
 }
 
-.eventUploadForm .checkbox-group input {
+.eventUploadForm .checkbox-group input,
+.eventUploadForm .eligible-year-group input {
     display: none; 
 }
 
-.eventUploadForm .checkbox-group input + span {
+.eventUploadForm .checkbox-group input + span,
+.eventUploadForm .eligible-year-group input + span {
     width: 16px;
     height: 16px;
     border: 2px solid #ccc;
@@ -152,12 +157,14 @@
     position: relative;
 }
 
-.eventUploadForm .checkbox-group input:checked + span {
+.eventUploadForm .checkbox-group input:checked + span ,
+.eventUploadForm .eligible-year-group input:checked + span{
     background-color: green;
     border-color: green;
 }
 
-.eventUploadForm .checkbox-group input + span:after {
+.eventUploadForm .checkbox-group input + span:after,
+.eventUploadForm .eligible-year-group input + span:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -170,7 +177,8 @@
     opacity: 0;
 }
 
-.eventUploadForm .checkbox-group input:checked + span:after {
+.eventUploadForm .checkbox-group input:checked + span:after ,
+.eventUploadForm .eligible-year-group input:checked + span:after{
     opacity: 1;
 }
 

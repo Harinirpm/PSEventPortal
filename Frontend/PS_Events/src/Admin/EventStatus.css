@@ -72,3 +72,20 @@
     vertical-align: middle;
     font-size: 18px;
 }
+.event .title{
+    display: flex;
+    margin-right: 10px;
+    gap: 10px; 
+    margin-bottom: 2%;
+    color: rgb(29, 29, 29);
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500;
+    flex-direction: row;
+    display: flex; 
+    align-items: center; 
+}
+.event .back-link {
+    margin-right: 10px; /* Add space between the link and the heading */
+    display: flex; /* Ensure the link behaves like a block element */
+    align-items: center; 
+  }

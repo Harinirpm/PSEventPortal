@@ -23,7 +23,7 @@ const Events = () => {
 
     return (
         <div className="event">
-            <h2>Event Upload</h2>
+            <h1>Event Upload</h1>
             <br></br>
             <Link to="/upload">
                 <button className='navigate-button'>+  Create Event</button>

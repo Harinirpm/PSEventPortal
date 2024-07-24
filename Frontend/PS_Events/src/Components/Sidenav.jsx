@@ -18,7 +18,7 @@ function Sidenav({ isOpen, role, handleLogout }) {
             </div>
             {role==='student' &&
             <div className='link'>
-                <NavLink to='/registrationstatus' className={({isActive}) => isActive ? "active" : ""}>
+                <NavLink to='/registered-events' className={({isActive}) => isActive ? "active" : ""}>
                 <div className='box'>
                     <GoChecklist className='icon' size={24}/>
                     <p>Registered Events</p>

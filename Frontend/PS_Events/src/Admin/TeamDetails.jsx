@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { FaArrowCircleLeft } from "react-icons/fa";
 import './TeamDetails.css';
+import ViewReport from './ViewReport';
 
 const TeamDetails = () => {
   const { eventid,eventId, teamName } = useParams();
@@ -12,6 +13,7 @@ const TeamDetails = () => {
   const [showRejectionPopup, setShowRejectionPopup] = useState(false); // Added state for rejection popup
   const [rewardPoints, setRewardPoints] = useState({});
   const navigate = useNavigate();
+  const [no,setNo]=useState(0);
 
   useEffect(() => {
     fetchTeamDetails();
@@ -22,7 +24,9 @@ const TeamDetails = () => {
       const response = await axios.get(`http://localhost:8081/events/${eventId}/teams/${teamName}`);
       setTeam(response.data);
       console.log(eventid)
+      console.log(eventId);
       console.log(response.data)
+      setNo(eventId);
     } catch (error) {
       console.error('Error fetching team details:', error);
     }
@@ -69,7 +73,7 @@ const TeamDetails = () => {
 
   const handleRejectionSubmit = async () => {
     try {
-      await axios.put(`http://localhost:8081/events/${eventid}/teams/${teamName}/reject`, { rejectionReason });
+      await axios.put(`http://localhost:8081/events/${eventId}/teams/${teamName}/reject`, { rejectionReason });
       alert('Team rejected successfully!');
       navigate(-1);
     } catch (error) {
@@ -154,49 +158,10 @@ const TeamDetails = () => {
           </li>
         ))}
       </ul>
-      <button onClick={handleApprove} className="button">Approve</button>
-      <button onClick={handleReject} className="button-r">Reject</button>
-
-      {/* {showApprovalPopup && (
-        <div className="approval-popup">
-          <br></br>
-          <div className="title">
-          <h1>Assign Reward Points</h1>
-          </div>
-          <div>
-            <h2>Team Leader</h2>
-            {teamLeader && (
-              <div>
-                <div className="detail-item">
-                <h3>Name:</h3><p> {teamLeader.name}</p>
-                </div>
-                <input
-                  className="reward-points"
-                  type="number"
-                  placeholder="Reward Points"
-                  onChange={(e) => handleRewardChange(teamLeader.name, e.target.value)}
-                />
-              </div>
-            )}
-            <h2>Team Members</h2>
-            {team.members?.filter(member => !member.isTeamLeader).map((member, index) => (
-              <div key={index}>
-                 <div className="detail-item">
-                <h3>Name:</h3><p> {member.name}</p>
-                </div>
-                <input
-                 className="reward-points"
-                  type="number"
-                  placeholder="Reward Points"
-                  onChange={(e) => handleRewardChange(member.name, e.target.value)}
-                />
-              </div>
-            ))}
-          </div>
-          <button onClick={handleApprovalSubmit} className="button-1">Submit</button>
-          <button onClick={() => setShowApprovalPopup(false)} className="button-c">Cancel </button>
-        </div>
-      )} */}
+      {team.level1==0 && <button onClick={handleApprove} className="button">Approve</button>}
+      {team.level1==0 && team.rejected!="NULL" && <button onClick={handleReject} className="button-r">Reject</button>}
+{/* <h1>{no}</h1> */}
+      {team.level2==1 && <ViewReport eventId={no} /> }
 
       {showRejectionPopup && (
          <div className="overlay">
